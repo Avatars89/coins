@@ -1,7 +1,7 @@
 package modelos;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+import java.util.Arrays;
 
 public class Divisa {
     @SerializedName("base_code")
@@ -13,7 +13,11 @@ public class Divisa {
     @SerializedName("conversion_result")
     public double montoConvertido;
     @SerializedName("conversion_rates")
-    public List tipoConversion;
+    public String[] tipoConversion;
+
+    public String[] getTipoConversion() {
+        return tipoConversion;
+    }
 
     public Divisa(){
 
@@ -24,9 +28,13 @@ public class Divisa {
         this.montoConvertido = monto;
     }
 
+
+
     @Override
     public String toString() {
-        return "El tipo de cambio de 1 " + monedaOrigen +" = $ " + tipoCambio + " " + monedaDestino +"." + "\nLo que tu dinero equivale a $ " + montoConvertido + " " + monedaDestino +".";
-    }
+        double moneda= montoConvertido/tipoCambio;
+        String textoDivisa = "Cambiaste  $" + String.format("%.2f",moneda) + " " + monedaOrigen + " a " + montoConvertido + " " + monedaDestino;
+        return textoDivisa;
 
+    }
 }
